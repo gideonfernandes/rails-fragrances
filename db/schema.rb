@@ -10,13 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_27_224918) do
-
-  create_table "customers", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+ActiveRecord::Schema.define(version: 20_201_227_233_329) do
+  create_table 'products', force: :cascade do |t|
+    t.string 'title', null: false
+    t.decimal 'price', default: '0.0', null: false
+    t.string 'image', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
+  create_table 'purchases', force: :cascade do |t|
+    t.integer 'user_id', null: false
+    t.decimal 'total', default: '0.0', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['user_id'], name: 'index_purchases_on_user_id'
+  end
+
+  create_table 'stocks', force: :cascade do |t|
+    t.integer 'product_id', null: false
+    t.integer 'amount', default: 0, null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['product_id'], name: 'index_stocks_on_product_id'
+  end
+
+  create_table 'users', force: :cascade do |t|
+    t.string 'name', null: false
+    t.string 'last_name', null: false
+    t.string 'email', null: false
+    t.string 'password_hash', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+  end
 end
