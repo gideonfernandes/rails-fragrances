@@ -8,4 +8,12 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_presence_of :email }
     it { is_expected.to validate_presence_of :password_hash }
   end
+
+  context 'when saving the model' do
+    subject(:user) { create(:user) }
+
+    it 'saving a valid user' do
+      expect(user.save!).to be_truthy
+    end
+  end
 end
